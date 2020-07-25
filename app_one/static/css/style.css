@@ -1,0 +1,14 @@
+.wrapper{
+    background-color: #002b36;
+}
+.bg-darkblue{
+     background-color :#073642;
+}
+.letter-spacing-2{
+    letter-spacing: 0.2em;
+}
+.height-350{
+    height: 350px;
+    object-fit: cover;
+
+}

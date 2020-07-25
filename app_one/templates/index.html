@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+</head>
+<body>
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-darkblue">
+        <div class="container">
+          <a class="navbar-brand letter-spacing-2 border-right px-3 border-dark" href="#">Cino</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Movies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0 nav-item active  navbar-nav navbar-dark">
+                <a href="" class="nav-link border-right border-dark">Log in</a><hr>
+                <a href="" class="nav-link">Sign up</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <div class="container">
+        <form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
+            <input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
+            <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
+        </form>
+
+    {#  ------------  slider-------------------#}
+
+    {#----------------------------------#}
+
+        <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
+            <div class="col-3 text-dark">
+                <div class="card w-100 bg-transparent text-white">
+                    <img class="card-img-top height-350" src="https://3.bp.blogspot.com/-Er7gMASCCgQ/UwEh52Ueo5I/AAAAAAAADNA/hxZwcNUPcDg/s1600/homefront-2013-movie-review.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <a href="#"><h5 class="text-white">Homefront (2013)</h5></a>
+                    </div>
+                </div>
+            </div>
+             <div class="col-3 text-dark">
+                <div class="card w-100 bg-transparent text-white">
+                    <img class="card-img-top height-350" src="https://images-na.ssl-images-amazon.com/images/I/81FcjKS7peL.jpg" alt="Card image cap">
+                    <div class="card-body">
+                         <a href="#"><h5 class="text-white">Aladdin</h5></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 text-dark">
+                <div class="card w-100 bg-transparent text-white">
+                    <img class="card-img-top height-350" src="https://m.media-amazon.com/images/M/MV5BYmNiYWEzZTQtY2ZlYS00YjRkLWFhZTYtMzQyNWMxMDUzZDFjXkEyXkFqcGdeQXVyOTg4MDYyNw@@._V1_UY1200_CR89,0,630,1200_AL_.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Four kids and it</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 text-dark">
+                <div class="card w-100 bg-transparent text-white">
+                    <img class="card-img-top height-350" src="https://lh3.googleusercontent.com/2i5WTEANxIcSeXhUxRfBUCZe7CG9uIrj6DK5Sy-cCNVFJ05yDeeHWGTFOAdGEEvOtp1l9ey15qATKvY96i0" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Jumanji</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+</body>
+</html>
