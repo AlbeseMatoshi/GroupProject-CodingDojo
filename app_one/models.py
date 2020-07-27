@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime, date
 from django.db import models
 import bcrypt
@@ -35,3 +36,61 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+    
+    
+class MovieManager(models.Manager):
+    def movie_validator(self, postData):
+        errors = {}     
+        if len(postData['title']) < 2:
+            errors["title"] = "Title should be at least 2 characters"
+        if len(postData['desc']) < 10:
+            errors["desc"] = "Description should be at least 10 characters"            
+        return errors
+
+class Movie(models.Model):
+    title = models.CharField(max_length=255)
+    desc = models.TextField()
+    likes = models.ManyToManyField(User, related_name='has_likes')
+    posted_by = models.ForeignKey(User, related_name='has_movies', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = MovieManager()
+    
+    
+class Review(models.Model):
+    rating = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
+    review = models.ForeignKey(Movie, related_name='has_reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+class Booking(models.Model):
+    tickets = models.IntegerField()
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    buyer = models.ForeignKey(User, related_name='has_tickets', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie_tickets', on_delete= models.CASCADE)
+    
+
+class CommentManager(models.Manager):
+    def comm_validator(self, postData):
+        errors = {}     
+        if len(postData['content']) < 5:
+            errors["content"] = "Content should be at least 5 characters"          
+        return errors
+       
+class Comments(models.Model):
+    content = models.TextField()
+    posted_by = models.ForeignKey(User, related_name='has_comments', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie', on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = CommentManager()
+    
+    
+
+
+    
+    
+    
+    
+    
