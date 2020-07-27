@@ -70,9 +70,26 @@ label {
   position: absolute;
   top: 8px;
   right: 20px;
-    border-bottom: 4px solid red;
+  border-bottom: 4px solid red;
   font-size: 28px;
   letter-spacing: 0.2em;
+}
+.card-image {
+    display: inline-block;
+    overflow: hidden;
+
+}
+.card-image > img {
+    transition: transform 0.3s;
+}
+
+.card-image > img:hover {
+    cursor: pointer;
+    transform:scale(1.05);
+    -ms-transform:scale(1.05); /* IE 9 */
+    -moz-transform:scale(1.05); /* Firefox */
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -o-transform:scale(1.05); /* Opera */
 }
 
 
