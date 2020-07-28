@@ -55,7 +55,17 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MovieManager()
+
+
     
+class MovieShowTime(models.Model):
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    showtime = models.ManyToManyField(Movie, related_name='showtime')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now= True)
+        
     
 class Review(models.Model):
     rating = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
@@ -92,15 +102,6 @@ class Booking(models.Model):
     movie = models.ForeignKey(Movie, related_name='movie_tickets', on_delete= models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  
-    
-    
-class MovieShowTime(models.Model):
-    date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    showtime = models.ManyToManyField(Movie, related_name='showtime')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now= True)
     
 
 
