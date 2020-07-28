@@ -67,9 +67,41 @@ class Review(models.Model):
 class Booking(models.Model):
     tickets = models.IntegerField()
     price = models.DecimalField(max_digits=4, decimal_places=2)
+    cino_room = models.ForeignKey(CinoRoom, related_name='rooms', on_delete = models.CASCADE)
     buyer = models.ForeignKey(User, related_name='has_tickets', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, related_name='movie_tickets', on_delete= models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
+    
+class CinoRoom(models.Model):
+    ROOM_CHOICES = [
+        ('A1', 'A1'),
+        ('A2', 'A2'),
+        ('A3', 'A3'),
+        ('B1', 'B1'),
+        ('B2', 'B2'),
+        ('B3', 'B3'),
+        ('C1', 'C1'),
+        ('C2', 'C2'),
+        ('C3', 'C3'),
+        
+    ]
+    room = models.CharField(max_length=2, choices = ROOM_CHOICES, default='A1')
+    movie = models.ForeignKey(Movie, related_name='movie', on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    
+class MovieShowTime(models.Model):
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    showtime = models.ManyToManyField(Movie, related_name='showtime')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now= True)
+    
+
 
 class CommentManager(models.Manager):
     def comm_validator(self, postData):
