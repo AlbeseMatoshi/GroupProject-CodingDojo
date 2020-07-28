@@ -64,15 +64,6 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-class Booking(models.Model):
-    tickets = models.IntegerField()
-    price = models.DecimalField(max_digits=4, decimal_places=2)
-    cino_room = models.ForeignKey(CinoRoom, related_name='rooms', on_delete = models.CASCADE)
-    buyer = models.ForeignKey(User, related_name='has_tickets', on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, related_name='movie_tickets', on_delete= models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
     
 class CinoRoom(models.Model):
     ROOM_CHOICES = [
@@ -88,9 +79,19 @@ class CinoRoom(models.Model):
         
     ]
     room = models.CharField(max_length=2, choices = ROOM_CHOICES, default='A1')
-    movie = models.ForeignKey(Movie, related_name='movie', on_delete = models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie_room', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    
+class Booking(models.Model):
+    tickets = models.IntegerField()
+    price = models.DecimalField(max_digits=4, decimal_places=2)
+    cino_room = models.ForeignKey(CinoRoom, related_name='rooms', on_delete = models.CASCADE)
+    buyer = models.ForeignKey(User, related_name='has_tickets', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie_tickets', on_delete= models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)  
     
     
 class MovieShowTime(models.Model):
