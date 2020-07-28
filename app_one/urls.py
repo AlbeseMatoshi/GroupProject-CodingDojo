@@ -21,5 +21,6 @@ urlpatterns = [
     path('create_user', views.create_user),
     path('login', views.login),
     path('login_page', views.login_page),
+    path('new_movie', views.new_movie),
     path('logout', views.log_out),
 ]
