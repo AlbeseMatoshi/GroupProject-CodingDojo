@@ -1,5 +1,6 @@
-.wrapper {
+.wrapper{
     background-color: #002b36;
+    color: #ffffff;
 }
 
 .bg-darkblue {
@@ -21,6 +22,7 @@
 body {
     background-color: #F4F7F6;
     font-family: 'Lato', sans-serif;
+    
 }
 
 #login-body {

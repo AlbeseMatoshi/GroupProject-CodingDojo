@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                   <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                         <a class="nav-link" href="#">Movies</a>
@@ -22,7 +22,7 @@
                   </ul>
                   <div class="form-inline my-2 my-lg-0 nav-item active  navbar-nav navbar-dark">
                         {% if logged_user %}
-                              <a href="/booking/{{logged_user.id}}" class="nav-link border-right border-dark">My bookings</a>
+                              <a href="/bookings" class="nav-link border-right border-dark">My bookings</a>
                               <a href="/logout" class="nav-link">Logout</a>
                         {% else %}
                               <a href="/login_page" class="nav-link">Log in</a>
