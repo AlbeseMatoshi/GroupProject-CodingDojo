@@ -35,12 +35,22 @@ def login(request):
 
 
 def dashboard(request):
-    context = {}
+    context = {
+        'movies' : Movie.objects.all()
+    }
     if 'uid' in request.session: 
-        context['logged_user'] = request.session['uid']
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'index.html', context)
 
 
 def log_out(request):
     request.session.clear()
     return redirect('/login_page')
+
+def show_one_movie(request, movie_id):
+    context = {
+        'movie' : Movie.objects.get(id=movie_id)
+    } 
+    if 'uid' in request.session: 
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
+    return render(request, 'show_movie.html', context)

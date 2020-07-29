@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from app_one.models import *
 
-def start_booking(request):
-      pass
+def show_all_bookings(request, user_id):
+      context = {}
+      if 'uid' in request.session:
+            context['logged_user'] = User.objects.get(id=request.session['uid'])
+      return render(request, 'all_bookings.html', context)
