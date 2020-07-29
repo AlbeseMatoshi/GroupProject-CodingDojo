@@ -19,9 +19,6 @@ def create_user(request):
         request.session['uid']= user.id
         return redirect('/')
     
-    
-    
-        
 def login(request):
     user = User.objects.filter(email=request.POST['email'])
     if len(user) > 0:
@@ -38,7 +35,10 @@ def login(request):
 
 
 def dashboard(request):
-    return render(request, 'index.html')
+    context = {}
+    if 'uid' in request.session: 
+        context['logged_user'] = request.session['uid']
+    return render(request, 'index.html', context)
 
 
 def log_out(request):
