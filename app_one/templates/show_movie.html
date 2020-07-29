@@ -19,14 +19,20 @@
 <body>
       <div class="wrapper"> 
             {% include 'includes/navbar.html' %}
-            <div class="container">
+            <div class="container p-5">
                   <div class="row">
-                        <div class="col col-10">
-                              <img href="#">IMG placehoder</img>
+                        <div class="col col-2">
+                        {% if movie.cover_image %}
+                              <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image"/>
+                        {% else %}
+                              <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
+                        {% endif %}
+                        </div>
+                        <div class="col col-8">
                               <h1>{{movie.title}}</h1>
                               <p>{{movie.desc}}</p>
                         </div>
-                        <div>
+                        <div class="col col-2">
                               <a href="#" class="btn btn-info">Get tickets</a>
                         </div>
                   </div>
