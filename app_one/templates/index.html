@@ -30,7 +30,11 @@
 			<div class="col-3 text-dark">
 				<div class="card w-100 bg-transparent text-white">
 					<div class="card-image">
-						<img class="card-img-top height-350" src="https://3.bp.blogspot.com/-Er7gMASCCgQ/UwEh52Ueo5I/AAAAAAAADNA/hxZwcNUPcDg/s1600/homefront-2013-movie-review.jpg" alt="Card image cap">
+					{% if movie_item.cover_image %}
+						<img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
+					{% else %}
+						<img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
+					{% endif %}
 					</div>
 					<div class="card-body">
 						<a href="/movie/{{movie_item.id}}">
