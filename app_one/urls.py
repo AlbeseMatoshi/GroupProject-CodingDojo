@@ -23,4 +23,11 @@ urlpatterns = [
     path('login_page', views.login_page),
     path('new_movie', views.new_movie),
     path('logout', views.log_out),
+    path('movie/<int:movie_id>', views.show_one_movie),
+    path('movie/<int:movie_id>/delete', views.delete_movie),
+
+    #DEVELOPMENT ONLY
+    path('utils', views.show_utils),
+    path('utils/movie/new', views.add_movie)
+    ##
 ]
