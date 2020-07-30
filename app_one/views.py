@@ -36,9 +36,11 @@ def login(request):
 
 
 def dashboard(request):
+    print(Movie.objects.all())
     context = {
-        'movies' : Movie.objects.all(),
+        'movies': Movie.objects.all(),
         'events': Events.objects.all(),
+        'newest_movies': Movie.objects.all()
     }
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
