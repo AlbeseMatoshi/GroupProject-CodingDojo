@@ -70,7 +70,7 @@ def show_utils(request):
     return render(request, 'development_utilities.html')
 
 def add_movie(request):
-    movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'])
+    movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'], video_url=request.POST['video_url'])
     if 'cover_image' in request.FILES != None:
         pic = request.FILES['cover_image']
         fs = FileSystemStorage()
