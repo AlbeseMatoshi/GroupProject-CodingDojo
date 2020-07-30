@@ -45,6 +45,10 @@ def dashboard(request):
     return render(request, 'index.html', context)
 
 
+def new_movie(request):
+    return render(request, 'new_movie.html')
+
+
 def log_out(request):
     request.session.clear()
     return redirect('/login_page')

@@ -74,8 +74,8 @@ class CinoRoom(models.Model):
     
 class ShowTime(models.Model):
     date = models.DateField()
-    movie = models.ForeignKey(Movie, related_name='has_show_times', on_delete = models.CASCADE)
-    room = models.ForeignKey(CinoRoom, related_name='has_show_times', on_delete = models.CASCADE)
+    movie = models.ForeignKey(Movie, related_name='movie', on_delete = models.CASCADE)
+    room = models.ForeignKey(CinoRoom, related_name='movie_room', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now= True)
            
@@ -83,30 +83,16 @@ class ShowTime(models.Model):
 class Booking(models.Model):
     tickets = models.IntegerField()
     price = models.DecimalField(max_digits=4, decimal_places=2)
-    buyer = models.ForeignKey(User, related_name='has_bookings', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)  
-
-class Seat(models.Model):
-    row = models.IntegerField()
-    number = models.IntegerField()
-    room = models.ForeignKey(CinoRoom, related_name="has_seats", on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)  
-
-class Seat_booked(models.Model):
-    seat = models.ForeignKey(Seat, related_name="has_seats_booked", on_delete=models.CASCADE)
-    booking = models.ForeignKey(Booking, related_name="has_seats_booked", on_delete=models.CASCADE)
-    show_time = models.ForeignKey(ShowTime, related_name="has_seats_booked", on_delete=models.CASCADE)
+    booking = models.ForeignKey(MovieShowTime, related_name='showtime', on_delete = models.CASCADE)
+    buyer = models.ForeignKey(User, related_name='has_tickets', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  
     
-
-# Movie related 
+    
 class Review(models.Model):
     rating = models.IntegerField(default=1, validators=[MaxValueValidator(5), MinValueValidator(1)])
-    for_movie = models.ForeignKey(Movie, related_name='has_reviews', on_delete=models.CASCADE)
-    posted_by = models.ForeignKey(User, related_name='has_reviews', on_delete=models.CASCADE)
+    review = models.ForeignKey(Movie, related_name='has_reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
