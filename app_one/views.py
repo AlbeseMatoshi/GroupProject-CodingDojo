@@ -37,7 +37,8 @@ def login(request):
 
 def dashboard(request):
     context = {
-        'movies' : Movie.objects.all()
+        'movies' : Movie.objects.all(),
+        'events': Events.objects.all(),
     }
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
@@ -79,4 +80,30 @@ def delete_movie(request, movie_id):
     movie.delete()
     return redirect('/')
 
+
+
+# Events
+
+def add_event(request):
+    event = Events.objects.create(title=request.POST['title'], desc=request.POST['description'])
+    if 'cover_image' in request.FILES != None:
+        pic = request.FILES['cover_image']
+        fs = FileSystemStorage()
+        fs.save(pic.name, pic)
+        event.cover_image = pic
+        event.save()
+    return redirect('/')
+
+def delete_event(request, event_id):
+    event = Events.objects.get(id=event_id)
+    event.delete()
+    return redirect('/')
+
+def show_one_event(request, event_id):
+    context = {
+        'event' : Events.objects.get(id=event_id)
+    } 
+    if 'uid' in request.session: 
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
+    return render(request, 'show_event.html', context)
   

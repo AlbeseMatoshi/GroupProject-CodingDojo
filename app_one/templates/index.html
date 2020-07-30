@@ -17,137 +17,153 @@
 </head>
 
 <body>
-	<div class="wrapper">
-		{% include 'includes/navbar.html' %}
-		<div class="container">
-		<form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
-			<input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
-			<i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
-		</form>
-		{# ------------ slider-------------------#} {#----------------------------------#}
-		<div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
-		{% for movie_item in movies.all %}
-			<div class="col-3 text-dark">
-				<div class="card w-100 bg-transparent text-white">
-					<div class="card-image">
-					{% if movie_item.cover_image %}
-						<img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
-					{% else %}
-						<img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
-					{% endif %}
-					</div>
-					<div class="card-body">
-						<a href="/movie/{{movie_item.id}}">
-							<h5 class="text-white">{{movie_item.title}}</h5>
-						</a>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-		</div>
-		</div>
-		<div class="container">
+    <div class="wrapper">
+        {% include 'includes/navbar.html' %}
+        <div class="container">
+            <form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
+                <input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
+                <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
+            </form>
+            {# ------------ slider-------------------#} {#----------------------------------#}
+            <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
+                {% for movie_item in movies.all %}
+                <div class="col-3 text-dark">
+                    <div class="card w-100 bg-transparent text-white">
+                        <div class="card-image">
+                            {% if movie_item.cover_image %}
+                            <img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap"> {% else %}
+                            <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image"> {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <a href="/movie/{{movie_item.id}}">
+                                <h5 class="text-white">{{movie_item.title}}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-		<div class="row mx-0">
-			<div class="col-7">
-				<img class="w-100 h-75" src="https://i2.wp.com/www.dasym.com/wp-content/uploads/2017/07/Cinema-Image-by-Alexandre-Chassignon-on-Flickr.jpg?fit=870%2C653&ssl=1" alt="">
-				<div class="top-right text-white">News</div>
-			</div>
-			<div class="col-4 text-white my-5">
-					<h3>Dear Costumers</h3>
-					<hr>
-					<p>AS A PREVENTIVE MEASURE AGAINST CODIV-19 VIRUS, THE CINEMA WILL BE CLOSED UNTIL THE NEXT ANNOUNCEMENT
-					STAY HEALTHY</p>
-				</div>
-			</div>
-		</div>
+            <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
+                {% for event_item in events.all %}
+                <div class="col-12 text-dark">
+                    <div class="card w-100 bg-transparent text-white">
+                        <div class="card-image">
+                            {% if event_item.cover_image %}
+                            <img class="card-img-top height-350" src="{{event_item.cover_image.url}}" alt="Card image cap"> {% else %}
+                            <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image"> {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <a href="/event/{{event_item.id}}">
+                                <h5 class="text-white">{{event_item.title}}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-		{# pagination#}
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center my-3 ">
-				<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
+            <div class="container">
+
+                <div class="row mx-0">
+                    <div class="col-7">
+                        <img class="w-100 h-75" src="https://i2.wp.com/www.dasym.com/wp-content/uploads/2017/07/Cinema-Image-by-Alexandre-Chassignon-on-Flickr.jpg?fit=870%2C653&ssl=1" alt="">
+                        <div class="top-right text-white">News</div>
+                    </div>
+                    <div class="col-4 text-white my-5">
+                        <h3>Dear Costumers</h3>
+                        <hr>
+                        <p>AS A PREVENTIVE MEASURE AGAINST CODIV-19 VIRUS, THE CINEMA WILL BE CLOSED UNTIL THE NEXT ANNOUNCEMENT STAY HEALTHY</p>
+                    </div>
+                </div>
+            </div>
+
+            {# pagination#}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center my-3 ">
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
 
 
 
 
-		<!-- Footer -->
-		<footer class="page-footer font-small mdb-color pt-4" style="background-color: rgba(7,54,66,0.87)">
-			<div class="container text-center text-md-left text-white">
-				<div class="row text-center text-md-left mt-3 pb-3 text-white">
-					<div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold letter-spacing-2" style="font-size: 25px">Cino</h6>
-						<p style="color: #a19e9e">This portal is maintained by the company "Cino". The materials and information on this portal may not be copied, printed, or used in any form Other wishes for more, without the approval of the Cino executives. .</p>
-					</div>
-					<hr class="w-100 clearfix d-md-none">
-					<hr class="w-100 clearfix d-md-none">
-					<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold" style="color: #a19e9e">Services</h6>
-						<p><a href="#!" class="text-white">Home</a></p>
-						<p><a href="#!" class="text-white">Movies</a></p>
-						<p><a href="#!" class="text-white">Events</a></p>
-						<p><a href="#!" class="text-white">About</a></p>
-					</div>
-					<hr class="w-100 clearfix d-md-none">
-					<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-						<h6 class="text-uppercase mb-4 font-weight-bold" >Contact</h6>
-						<p style="color: #a19e9e">
-							<i class="fas fa-home mr-3 "></i> New York, NY 10012, US</p>
-						<p style="color: #a19e9e">
-							<i class="fas fa-envelope mr-3"></i> cino@gmail.com</p>
-						<p style="color: #a19e9e">
-							<i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-						<p style="color: #a19e9e">
-							<i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-					</div>
-				</div>
-				<hr>
-				<div class="row d-flex align-items-center">
-					<div class="col-md-7 col-lg-8">
-						<!--Copyright-->
-						<p class="text-center text-md-left">© 2020 Copyright:
-							<a href="https://mdbootstrap.com/">
-							<strong style="color: #a19e9e"> Cino.com</strong>
-							</a>
-						</p>
-					</div>
-					<div class="col-md-5 col-lg-4 ml-lg-0">
-						<div class="text-center text-md-right">
-						<ul class="list-unstyled list-inline">
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-								<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-								<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-								<i class="fab fa-google-plus-g"></i>
-								</a>
-							</li>
-							<li class="list-inline-item">
-								<a class="btn-floating btn-sm rgba-white-slight mx-1">
-								<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
+            <!-- Footer -->
+            <footer class="page-footer font-small mdb-color pt-4" style="background-color: rgba(7,54,66,0.87)">
+                <div class="container text-center text-md-left text-white">
+                    <div class="row text-center text-md-left mt-3 pb-3 text-white">
+                        <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold letter-spacing-2" style="font-size: 25px">Cino</h6>
+                            <p style="color: #a19e9e">This portal is maintained by the company "Cino". The materials and information on this portal may not be copied, printed, or used in any form Other wishes for more, without the approval of the Cino executives. .</p>
+                        </div>
+                        <hr class="w-100 clearfix d-md-none">
+                        <hr class="w-100 clearfix d-md-none">
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold" style="color: #a19e9e">Services</h6>
+                            <p><a href="#!" class="text-white">Home</a></p>
+                            <p><a href="#!" class="text-white">Movies</a></p>
+                            <p><a href="#!" class="text-white">Events</a></p>
+                            <p><a href="#!" class="text-white">About</a></p>
+                        </div>
+                        <hr class="w-100 clearfix d-md-none">
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                            <p style="color: #a19e9e">
+                                <i class="fas fa-home mr-3 "></i> New York, NY 10012, US</p>
+                            <p style="color: #a19e9e">
+                                <i class="fas fa-envelope mr-3"></i> cino@gmail.com</p>
+                            <p style="color: #a19e9e">
+                                <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                            <p style="color: #a19e9e">
+                                <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-7 col-lg-8">
+                            <!--Copyright-->
+                            <p class="text-center text-md-left">© 2020 Copyright:
+                                <a href="https://mdbootstrap.com/">
+                                    <strong style="color: #a19e9e"> Cino.com</strong>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-md-5 col-lg-4 ml-lg-0">
+                            <div class="text-center text-md-right">
+                                <ul class="list-unstyled list-inline">
+                                    <li class="list-inline-item">
+                                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                            <i class="fab fa-google-plus-g"></i>
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
 
-					</div>
-				</div>
-			</div>
-		</footer>
-	<!-- Footer -->
-	</div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+        </div>
 </body>
 
 </html>
