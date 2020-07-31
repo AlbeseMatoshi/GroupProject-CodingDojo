@@ -55,7 +55,8 @@ def log_out(request):
 
 def show_one_movie(request, movie_id):
     context = {
-        'movie' : Movie.objects.get(id=movie_id)
+        'movie' : Movie.objects.get(id=movie_id),
+        'show_times' : ShowTime.objects.filter(movie=movie_id)
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])

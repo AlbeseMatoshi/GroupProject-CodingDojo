@@ -33,8 +33,35 @@
                               <p>{{movie.desc}}</p>
                         </div>
                         <div class="col col-2">
-                              <a href="#" class="btn btn-info">Get tickets</a>
+                              <a href="/booking/{{movie.id}}/ticket/new" class="btn btn-info">Get tickets</a>
                         </div>
+                  </div>
+                  <div class="row">
+
+                        <table class="table table-hover">
+                              <thead>
+                              <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Room</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for show_time_item in show_times.all %}
+                                    <tr>
+                                          <td>{{show_time_item.date}}</td>
+                                          <td>{{show_time_item.time}}</td>
+                                          <td>{{show_time_item.room}}</td>
+                                    </tr>
+                              
+                              {% endfor %}
+                             
+                              </tbody>
+                        </table>
+
+                        
+                        
+                        
                   </div>
             </div>      
       </div> 
