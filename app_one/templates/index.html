@@ -25,6 +25,7 @@
                 <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
             </form>
             {# ------------ slider-------------------#} {#----------------------------------#}
+            <h3>Latest movies:</h3>
             <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
                 {% for movie_item in movies.all %}
                 <div class="col-3 text-dark">
@@ -44,6 +45,7 @@
                 {% endfor %}
             </div>
 
+            <h3>Latest events:</h3>
             <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
                 {% for event_item in events.all %}
                 <div class="col-12 text-dark">
@@ -64,7 +66,6 @@
             </div>
 
             <div class="container">
-
                 <div class="row mx-0">
                     <div class="col-7">
                         <img class="w-100 h-75" src="https://i2.wp.com/www.dasym.com/wp-content/uploads/2017/07/Cinema-Image-by-Alexandre-Chassignon-on-Flickr.jpg?fit=870%2C653&ssl=1" alt="">
@@ -88,9 +89,6 @@
                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
             </nav>
-
-
-
 
             <!-- Footer -->
             <footer class="page-footer font-small mdb-color pt-4" style="background-color: rgba(7,54,66,0.87)">
