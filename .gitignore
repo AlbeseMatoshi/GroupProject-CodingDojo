@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .idea/
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
@@ -147,3 +148,9 @@ dmypy.json
 .pytype/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+=======
+__pycache__/
+.vscode/
+venv/
+db.sqlite3
+>>>>>>> 2eaa0b1c6313c48a0a0a6f46ab6272a9cc0e122b
