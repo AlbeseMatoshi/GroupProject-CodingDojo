@@ -55,25 +55,14 @@ class Movie(models.Model):
     objects = MovieManager()
 
 class CinoRoom(models.Model):
-    ROOM_CHOICES = [
-        ('A1', 'A1'),
-        ('A2', 'A2'),
-        ('A3', 'A3'),
-        ('B1', 'B1'),
-        ('B2', 'B2'),
-        ('B3', 'B3'),
-        ('C1', 'C1'),
-        ('C2', 'C2'),
-        ('C3', 'C3'),
-        
-    ]
-    room = models.CharField(max_length=2, choices = ROOM_CHOICES, default='A1')
+    room = models.CharField(max_length=2, default='A1')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     
 class ShowTime(models.Model):
     date = models.DateField()
+    time = models.TimeField(default=datetime.now)
     movie = models.ForeignKey(Movie, related_name='has_show_times', on_delete = models.CASCADE)
     room = models.ForeignKey(CinoRoom, related_name='has_show_times', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -88,7 +77,7 @@ class Booking(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  
 
 class Seat(models.Model):
-    row = models.IntegerField()
+    row = models.CharField(max_length=1)
     number = models.IntegerField()
     room = models.ForeignKey(CinoRoom, related_name="has_seats", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

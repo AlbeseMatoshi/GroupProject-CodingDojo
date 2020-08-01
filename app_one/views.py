@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
-from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
+from app_bookings.models import Event
 import bcrypt
 
 def login_page(request):
@@ -37,11 +37,16 @@ def login(request):
 
 def dashboard(request):
     context = {
-        'movies' : Movie.objects.all()
+        'movies' : Movie.objects.all(),
+        'events': Event.objects.all(),
     }
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'index.html', context)
+
+
+def new_movie(request):
+    return render(request, 'new_movie.html')
 
 
 def log_out(request):
@@ -50,33 +55,19 @@ def log_out(request):
 
 def show_one_movie(request, movie_id):
     context = {
-        'movie' : Movie.objects.get(id=movie_id)
+        'movie' : Movie.objects.get(id=movie_id),
+        'show_times' : ShowTime.objects.filter(movie=movie_id)
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'show_movie.html', context)
 
-
-
-#DEVELOPMENT ONLY
-## FILE TO HELP US DEVELOP OTHER PARTS
-## USER WILL NOT HAVE ACCESS TO THESE ACTIONS
-def show_utils(request):
-    return render(request, 'development_utilities.html')
-
-def add_movie(request):
-    movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'])
-    if 'cover_image' in request.FILES != None:
-        pic = request.FILES['cover_image']
-        fs = FileSystemStorage()
-        fs.save(pic.name, pic)
-        movie.cover_image = pic
-        movie.save()
-    return redirect('/')
-
-def delete_movie(request, movie_id):
-    movie = Movie.objects.get(id=movie_id)
-    movie.delete()
-    return redirect('/')
-
+def show_one_event(request, event_id):
+    context = {
+        'event' : Event.objects.get(id=event_id)
+    } 
+    if 'uid' in request.session: 
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
+    return render(request, 'show_event.html', context)
   
+
