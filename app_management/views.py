@@ -7,9 +7,12 @@ from app_bookings.models import *
 ## FILE TO HELP US DEVELOP OTHER PARTS
 ## USER WILL NOT HAVE ACCESS TO THESE ACTIONS
 def show_dashboard(request):
+    
     context = {
         'movies' : Movie.objects.all(),
-        'rooms' : CinoRoom.objects.all()
+        'rooms' : CinoRoom.objects.all(),
+        'user' : User.objects.filter(role=0),
+        'logged_user': User.objects.get(id=request.session['uid'])
     }
     return render(request, 'dashboard.html', context)
 

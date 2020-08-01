@@ -18,7 +18,9 @@ def create_user(request):
         return redirect('/login_page')
     else:
         password = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
-        user=User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password= password)
+        user=User.objects.create(first_name=request.POST['first_name'],
+                                 last_name=request.POST['last_name'], email=request.POST['email'],
+                                 password= password, role = request.POST['role'])
         request.session['uid']= user.id
         return redirect('/')
     
