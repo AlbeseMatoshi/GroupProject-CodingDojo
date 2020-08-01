@@ -20,7 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', include('app_one.urls')),
-    path('booking/', include('app_bookings.urls'))
+    path('booking/', include('app_bookings.urls')),
+    path('management/', include('app_management.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
