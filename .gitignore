@@ -1,4 +1,7 @@
 .idea/
 db.sqlite3
-__pychache__
+__pycache__
 __pycache__/
+*.log
+*.pot
+*.pyc
