@@ -1,4 +1,4 @@
-<!doctype html>
+             <!doctype html>
 <html lang="en">
 
 <head>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script src="{% static 'js/jquery.twbsPagination.js' %}" type="text/javascript"></script>
 
 </head>
 
@@ -26,26 +27,6 @@
             <input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
             <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
         </form>
-        {# ------------ slider-------------------#}
-        <div class="row pt-2">
-            <div class="col-12 center top-movies slider" id="carousel" style="visibility:hidden;">
-                {% for new_movie in newest_movies %}
-                    <div>
-                        <a href="movies/{{ new_movie.id }}">
-                            {% if new_movie.cover_image %}
-                                <img class="img-fluid" src="{{ new_movie.cover_image.url }}">
-                            {% else %}
-                                <img class="img-fluid" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
-                            {% endif %}
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-
-        {#----------------------------------#}
-
         <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
             {% for movie_item in movies.all %}
                 <div class="col-3 text-dark">
@@ -64,6 +45,7 @@
                     </div>
                 </div>
             {% endfor %}
+            <ul class="pagination" id="pagination"></ul>
         </div>
 
         <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
@@ -111,9 +93,21 @@
             </ul>
         </nav>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/foyufD52aog" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {# ------------ slider-------------------#}
+        <div class="row pt-2">
+            <div class="col-12 center top-movies slider" id="carousel" style="visibility:hidden;">
+                {% for new_movie in newest_movies %}
+                    <div>
+                        <a href="movies/{{ new_movie.id }}">
+                            <img class="img-fluid" src="{{ new_movie.cover_image.url }}">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
 
+        {#----------------------------------#}
         <!-- Footer -->
         <footer class="page-footer font-small mdb-color pt-4" style="background-color: rgba(7,54,66,0.87)">
             <div class="container text-center text-md-left text-white">
@@ -192,6 +186,15 @@
 
 <script>
     $(document).ready(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: {{ total_pages }},
+            visiblePages: 10,
+            startPage: {{ current_page }},
+        }).on('page', function (event, page) {
+                window.location.href = window.location.origin + "/page/" + page;
+        });
+
+
         $("#carousel").css('visibility', 'visible');
 
         $('.top-movies').slick({
@@ -201,7 +204,7 @@
             slidesToScroll: 1,
             arrows: true,
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 700,
             centerPadding: '60px',
             slidesToShow: 8,
             responsive: [
@@ -225,10 +228,6 @@
                 }
             ]
         });
-
-
     });
-
 </script>
-
 </html>
