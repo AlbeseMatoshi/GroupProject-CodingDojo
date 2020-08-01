@@ -1,53 +1,6 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cino</title>
+{% extends 'base.html' %}
+{% block 'content' %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-
-</head>
-
-<body>
-<div class="wrapper">
-    {% include 'includes/navbar.html' %}
-    <div class="container">
-        <form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
-            <input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
-            <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
-        </form>
-        {# ------------ slider-------------------#}
-        <div class="row pt-2">
-            <div class="col-12 center top-movies slider" id="carousel" style="visibility:hidden;">
-                {% for new_movie in newest_movies %}
-                    <div>
-                        <a href="movies/{{ new_movie.id }}">
-                            {% if new_movie.cover_image %}
-                                <img class="img-fluid" src="{{ new_movie.cover_image.url }}">
-                            {% else %}
-                                <img class="img-fluid" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
-                            {% endif %}
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-
-        {#----------------------------------#}
-
-        <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
-            {% for movie_item in movies.all %}
                 <div class="col-3 text-dark">
                     <div class="card w-100 bg-transparent text-white">
                         <div class="card-image">
@@ -100,6 +53,17 @@
             </div>
         </div>
 
+            {# pagination#}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center my-3 ">
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+{% endblock %}
         {# pagination#}
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center my-3 ">
