@@ -1,2 +1,4 @@
 .idea/
 db.sqlite3
+app_one/__pycache__/
+__pycache__/

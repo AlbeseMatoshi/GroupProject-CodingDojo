@@ -52,6 +52,7 @@ class Movie(models.Model):
     cover_image = models.ImageField(upload_to="images", blank=True)   
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    video_url = models.TextField()
     objects = MovieManager()
 
 class CinoRoom(models.Model):
