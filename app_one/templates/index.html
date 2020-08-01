@@ -34,7 +34,7 @@
             <div class="col-12 center top-movies slider" id="carousel" style="visibility:hidden;">
                 {% for new_movie in newest_movies %}
                     <div>
-                        <a href="movies/{{ new_movie.id }}">
+                        <a href="/movie/{{ new_movie.id }}">
                             <img class="img-fluid w-100 px-2" style="height: 260px !important;" src="{{ new_movie.cover_image.url }}">
                         </a>
                     </div>
@@ -50,10 +50,14 @@
                 <div class="col-3 text-dark">
                     <div class="card w-100 bg-transparent text-white">
                         <div class="card-image">
+                            <a href="/movie/{{movie_item.id}}">
+
                             {% if movie_item.cover_image %}
-                                <img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
+                                    <img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
                             {% else %}
-                                <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image"> {% endif %}
+                                <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
+                            {% endif %}
+                            </a>
                         </div>
                         <div class="card-body">
                             <a href="/movie/{{movie_item.id}}">
