@@ -31,5 +31,6 @@ urlpatterns = [
     path('utils', views.show_utils),
     path('utils/movie/new', views.add_movie),
     path('utils/events/new', views.add_event),
+    path('search', views.search)
     ##
 ]

@@ -24,12 +24,13 @@
     {% include 'includes/navbar.html' %}
     <div class="container">
 
-        <form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
-            <input class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
+        <form action="/search" class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
+            <input name="q" class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
             <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
         </form>
         {# ------------ slider-------------------#}
         <div class="row pt-2">
+            {% if newest_movies %}
             <h5 class="ml-4">You can now watch:</h5>
             <div class="col-12 center top-movies slider" id="carousel" style="visibility:hidden;">
                 {% for new_movie in newest_movies %}
@@ -40,33 +41,37 @@
                     </div>
                 {% endfor %}
             </div>
+            {% endif %}
         </div>
-
 
         {#----------------------------------#}
 
         <div class="row my-5 text-center shadow-lg p-3 mb-5 rounded">
-            {% for movie_item in movies.all %}
-                <div class="col-3 text-dark">
-                    <div class="card w-100 bg-transparent text-white">
-                        <div class="card-image">
-                            <a href="/movie/{{movie_item.id}}">
+            {% if movies %}
+                {% for movie_item in movies.all %}
+                    <div class="col-3 text-dark">
+                        <div class="card w-100 bg-transparent text-white">
+                            <div class="card-image">
+                                <a href="/movie/{{movie_item.id}}">
 
-                            {% if movie_item.cover_image %}
-                                    <img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
-                            {% else %}
-                                <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
-                            {% endif %}
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <a href="/movie/{{movie_item.id}}">
-                                <h5 class="text-white">{{movie_item.title}}</h5>
-                            </a>
+                                {% if movie_item.cover_image %}
+                                        <img class="card-img-top height-350" src="{{movie_item.cover_image.url}}" alt="Card image cap">
+                                {% else %}
+                                    <img class="card-img-top height-350" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
+                                {% endif %}
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="/movie/{{movie_item.id}}">
+                                    <h5 class="text-white">{{movie_item.title}}</h5>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <img src="{% static '/img/404.svg' %}" class="text-center w-50 mx-auto" alt="404 not found">
+            {% endif %}
             <div class="col-12">
                 <ul class="pagination pt-3 justify-content-center" id="pagination"></ul>
             </div>

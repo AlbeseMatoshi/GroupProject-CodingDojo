@@ -127,3 +127,12 @@ def show_page(request, page_id):
     if 'uid' in request.session:
         context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'index.html', context)
+
+def search(request):
+    if "q" in request.GET:
+        context = {
+            "movies": Movie.objects.filter(title__contains=request.GET["q"])
+        }
+        return render(request, "index.html", context)
+    else:
+        return redirect('/')
