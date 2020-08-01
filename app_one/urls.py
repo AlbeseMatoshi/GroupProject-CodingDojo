@@ -26,7 +26,7 @@ urlpatterns = [
     path('movie/<int:movie_id>', views.show_one_movie),
     path('movie/<int:movie_id>/delete', views.delete_movie),
     path('event/<int:event_id>', views.show_one_event),
-
+    path('page/<int:page_id>', views.show_page),
     #DEVELOPMENT ONLY
     path('utils', views.show_utils),
     path('utils/movie/new', views.add_movie),

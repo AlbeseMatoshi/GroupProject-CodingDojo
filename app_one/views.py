@@ -1,9 +1,11 @@
 from __future__ import unicode_literals
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
+import numpy as np
 
 def login_page(request):
     return render(request, 'login.html')
@@ -36,13 +38,7 @@ def login(request):
 
 
 def dashboard(request):
-    context = {
-        'movies' : Movie.objects.all(),
-        'events': Events.objects.all(),
-    }
-    if 'uid' in request.session: 
-        context['logged_user'] = User.objects.get(id=request.session['uid'])
-    return render(request, 'index.html', context)
+    return show_page(request, 1)
 
 
 def new_movie(request):
@@ -70,7 +66,7 @@ def show_utils(request):
     return render(request, 'development_utilities.html')
 
 def add_movie(request):
-    movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'])
+    movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'], video_url=request.POST['video_url'])
     if 'cover_image' in request.FILES != None:
         pic = request.FILES['cover_image']
         fs = FileSystemStorage()
@@ -105,9 +101,29 @@ def delete_event(request, event_id):
 
 def show_one_event(request, event_id):
     context = {
-        'event' : Events.objects.get(id=event_id)
+        'event': Events.objects.get(id=event_id)
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'show_event.html', context)
-  
+
+
+def show_page(request, page_id):
+    movies_per_page = 12
+    total_pages = int(len(Movie.objects.all()) / movies_per_page) + 1
+    print(total_pages)
+    if page_id > total_pages:
+        return HttpResponse("error 404")
+    elif page_id == total_pages and len(Movie.objects.all()) % movies_per_page > 0:
+      movies_per_page = len(Movie.objects.all()) % movies_per_page
+
+    context = {
+        'movies': Movie.objects.all()[(page_id-1)*12:(page_id-1)*12+movies_per_page],
+        'events': Events.objects.all(),
+        'newest_movies': Movie.objects.all(),
+        'total_pages': total_pages,
+        'current_page': page_id
+    }
+    if 'uid' in request.session:
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
+    return render(request, 'index.html', context)
