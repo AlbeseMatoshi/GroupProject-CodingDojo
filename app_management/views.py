@@ -63,5 +63,6 @@ def add_cino_room(request):
 def add_show_time(request):
     movie = Movie.objects.get(id=request.POST['movie'])
     room = CinoRoom.objects.get(id=request.POST['cino_room'])
-    ShowTime.objects.create(date=request.POST['movie_show_date'], time=request.POST['movie_show_time'], movie=movie, room=room)
+    ShowTime.objects.create(date=request.POST['movie_show_date'], time=request.POST['movie_show_time'], tickets = request.POST['movie_tickets'], price = request.POST['price'], movie=movie, room=room)
     return redirect('/management')
+

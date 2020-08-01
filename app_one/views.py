@@ -98,3 +98,12 @@ def search(request):
         return render(request, "index.html", context)
     else:
         return redirect('/')
+    
+
+# def tickets(request, movie_id):
+#     request.session['quantity'] = int(request.POST['tickets'])
+#     movie = Movie.objects.get(id=movie_id)
+    
+#     price =  * request.session['quantity']
+#     booking = Booking.objects.create(tickets = request.POST['tickets'], price = price)
+#     return redirect('/booking')

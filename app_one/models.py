@@ -50,7 +50,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=255)
     desc = models.TextField()
     likes = models.ManyToManyField(User, related_name='has_likes')
-    cover_image = models.ImageField(upload_to="images", blank=True)   
+    cover_image = models.ImageField(upload_to="images", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     video_url = models.TextField()
@@ -64,6 +64,8 @@ class CinoRoom(models.Model):
     
 class ShowTime(models.Model):
     date = models.DateField()
+    tickets = models.IntegerField()
+    price = models.DecimalField(max_digits=4, decimal_places=2)   
     time = models.TimeField(auto_now=True)
     movie = models.ForeignKey(Movie, related_name='has_show_times', on_delete = models.CASCADE)
     room = models.ForeignKey(CinoRoom, related_name='has_show_times', on_delete = models.CASCADE)
@@ -73,7 +75,7 @@ class ShowTime(models.Model):
     
 class Booking(models.Model):
     tickets = models.IntegerField()
-    price = models.DecimalField(max_digits=4, decimal_places=2)
+    price = models.DecimalField(max_digits=4, decimal_places=2)   
     buyer = models.ForeignKey(User, related_name='has_bookings', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  

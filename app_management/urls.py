@@ -7,6 +7,6 @@ urlpatterns = [
       path('events/new', views.add_event),
       path('<int:movie_id>/delete', views.delete_movie),
       path('room/new', views.add_cino_room),
-      path('showtime/new', views.add_show_time)
-
+      path('showtime/new', views.add_show_time),
+      
 ]
