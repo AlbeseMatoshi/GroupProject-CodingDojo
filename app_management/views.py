@@ -7,9 +7,12 @@ from app_bookings.models import *
 ## FILE TO HELP US DEVELOP OTHER PARTS
 ## USER WILL NOT HAVE ACCESS TO THESE ACTIONS
 def show_dashboard(request):
+    
     context = {
         'movies' : Movie.objects.all(),
-        'rooms' : CinoRoom.objects.all()
+        'rooms' : CinoRoom.objects.all(),
+        'user' : User.objects.filter(role=0),
+        'logged_user': User.objects.get(id=request.session['uid'])
     }
     return render(request, 'dashboard.html', context)
 
@@ -60,5 +63,6 @@ def add_cino_room(request):
 def add_show_time(request):
     movie = Movie.objects.get(id=request.POST['movie'])
     room = CinoRoom.objects.get(id=request.POST['cino_room'])
-    ShowTime.objects.create(date=request.POST['movie_show_date'], time=request.POST['movie_show_time'], movie=movie, room=room)
+    ShowTime.objects.create(date=request.POST['movie_show_date'], time=request.POST['movie_show_time'], tickets = request.POST['movie_tickets'], price = request.POST['price'], movie=movie, room=room)
     return redirect('/management')
+

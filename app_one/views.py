@@ -18,7 +18,9 @@ def create_user(request):
         return redirect('/login_page')
     else:
         password = bcrypt.hashpw(request.POST['password'].encode(),bcrypt.gensalt()).decode()
-        user=User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email=request.POST['email'], password= password)
+        user=User.objects.create(first_name=request.POST['first_name'],
+                                 last_name=request.POST['last_name'], email=request.POST['email'],
+                                 password= password, role = request.POST['role'])
         request.session['uid']= user.id
         return redirect('/')
     
@@ -96,3 +98,12 @@ def search(request):
         return render(request, "index.html", context)
     else:
         return redirect('/')
+    
+
+# def tickets(request, movie_id):
+#     request.session['quantity'] = int(request.POST['tickets'])
+#     movie = Movie.objects.get(id=movie_id)
+    
+#     price =  * request.session['quantity']
+#     booking = Booking.objects.create(tickets = request.POST['tickets'], price = price)
+#     return redirect('/booking')
