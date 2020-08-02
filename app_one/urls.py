@@ -26,6 +26,7 @@ urlpatterns = [
     path('movie/<int:movie_id>', views.show_one_movie),
     path('event/<int:event_id>', views.show_one_event),
     path('page/<int:page_id>', views.show_page),
+    # path('tickets/<int:movie_id>', views.tickets),
     #DEVELOPMENT ONLY
     path('search', views.search)
     ##

@@ -17,37 +17,43 @@
 </head>
 
 <body>
-      <div class="wrapper"> 
-            {% include 'includes/navbar.html' %}
-            <div class="container p-5">
-                  <div class="row">
-                       <div class="col col-2">
-                        {% if movie.cover_image %}
-                              <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image"/>
-                        {% else %}
-                              <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">
-                        {% endif %}
-                        </div>
-                        <div class="col-5">
-                              <h1>{{movie.title}}</h1>
-                              <p>{{movie.desc}}</p>
-                              <h5>Here is a trailer for you:</h5>
-                              <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="col">
-                            <p>Available tickets: <b>6</b></p>
-                            <p>Happening in:
-                            <ul>
-                              {% for showtime_item in showtimes.all %}
-                              <li> <b>{{showtime_item.date}}, {{showtime_item.time}}</b> </li>
-                              {% endfor %}
-                            </ul>
-                            </p>
-                            <p>IMDb rate: <b>7/10</b></p>
-                            <a href="#" class="btn btn-info btn-block">Get tickets</a>
-                        </div>
-                  </div>
-            </div>      
-      </div> 
+    <div class="wrapper">
+        {% include 'includes/navbar.html' %}
+        <div class="container p-5">
+            <div class="row">
+                <div class="col col-2">
+                    {% if movie.cover_image %}
+                    <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image" /> {% else %}
+                    <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image"> {% endif %}
+                </div>
+                <div class="col-5">
+                    <h1>{{movie.title}}</h1>
+                    <p>{{movie.desc}}</p>
+                    <h5>Here is a trailer for you:</h5>
+                    <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="col">
+
+                    <ul>
+                        {% for showtime_item in showtimes.all %}
+                        <p>Available tickets: <b>{{showtime_item.tickets}}</b></p>
+                        <p>Price: <b>{{showtime_item.price}}</b></p>
+                        <p>Happening in:
+                            <li> <b>{{showtime_item.date}}, {{showtime_item.time}}</b> </li>
+
+                    </ul>
+                    </p>
+                    <p>IMDb rate: <b>7/10</b></p>
+                    <form action="/tickets/{{showtime.id}}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" class="form-control" name="tickets">
+                        <button class="btn btn-info btn-block" type="submit">Get tickets</button>
+                    </form>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
