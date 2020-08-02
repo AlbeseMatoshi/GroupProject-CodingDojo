@@ -23,11 +23,11 @@
 <div class="wrapper">
     {% include 'includes/navbar.html' %}
     <div class="container">
-
         <form action="/search" class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
             <input name="q" class="form-control form-control-sm mr-3 my-3 w-50" type="text" placeholder="Search" aria-label="Search">
             <i class="fas fa-search" style="color: #a19e9e" aria-hidden="true"></i>
         </form>
+
         {# ------------ slider-------------------#}
         <div class="row pt-2">
             {% if newest_movies %}
