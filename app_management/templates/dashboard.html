@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'base.html' %}
 {% block 'content' %}
     <div class="row mb-4">
@@ -73,6 +72,18 @@
                     <input type="date" class="form-control" id="movie_show_date" name="movie_show_date">
                 </div>
                 <div class="form-group">
+                    <label for="movie_tickets">
+                        Available Tickets
+                    </label>
+                    <input type="number" id="movie_tickets" class="form-control" name="movie_tickets" placeholder="10">
+                </div>
+                <div class="form-group">
+                    <label for="movie_price">
+                        Ticket price
+                    </label>
+                    <input type="number" id="movie_price" class="form-control" name="price" placeholder="3">
+                </div>
+                <div class="form-group">
                     <label for="movie_show_time">Time</label>
                     <input type="time" class="form-control" id="movie_show_time" name="movie_show_time">
                 </div>
@@ -111,115 +122,3 @@
     });
     </script>
 {%  endblock %}
-=======
-{% extends 'base.html' %} {% block 'content' %} {% if logged_user in user %}
-<h1>This part is reserved for admins only!</h1>
-
-{% elif logged_user not in user %}
-<h3>Add a movie</h3>
-<form action="movie/new" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group mt-3">
-        <label for="movie_cover_image">Upload picture:</label>
-        <input type="file" class="form-control-file" id="movie_cover_image" name="cover_image">
-    </div>
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
-    </div>
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" name="description">
-    </div>
-    <div class="form-group">
-        <label for="video_url">Youtube Video Embedded URL</label>
-        <input type="text" class="form-control" id="video_url" name="video_url">
-    </div>
-
-    <button type="submit" class="btn btn-info">Publish</button>
-</form>
-<hr>
-
-<h3>Add an Event</h3>
-<form action="events/new" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group mt-3">
-        <label for="event_cover_image">Upload picture:</label>
-        <input type="file" class="form-control-file" id="event_cover_image" name="cover_image">
-    </div>
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
-    </div>
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" name="description">
-    </div>
-    <button type="submit" class="btn btn-info">Publish</button>
-</form>
-<hr>
-<h3>Add Room</h3>
-<small>INFO: when a room is created, so are seats of that room</small>
-<form action="room/new" method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="Room">Room name:</label>
-        <input type="text" class="form-control" id="Room" name="room_name">
-    </div>
-    <button type="submit" class="btn btn-info">Add</button>
-</form>
-<hr>
-<h3>Add a Movie ShowTime</h3>
-<form action="showtime/new" method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="movie_show_date">Date</label>
-        <input type="date" class="form-control" id="movie_show_date" name="movie_show_date">
-    </div>
-    <div class="form-group">
-        <label for="movie_show_time">Time</label>
-        <input type="time" class="form-control" id="movie_show_time" name="movie_show_time">
-    </div>
-    <div class="form-group">
-        <label for="movie_tickets">Tickets</label>
-        <input type="number" class="form-control" id="movie_tickets" name="movie_tickets">
-    </div>
-    <div class="form-group">
-        <label for="price">Price for the movie ticket</label>
-        <input type="number" min="1" step="any" class="form-control" id="price" name="price">
-    </div>
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="cino_room">Room:</label>
-        </div>
-        <select class="custom-select" id="cino_room" name="cino_room">
-                    <option selected>Choose...</option>
-                    {% for room in rooms %}
-                        <option value="{{room.id}}">{{room.room}}</option>
-                    {% endfor %}
-                </select>
-    </div>
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="movie">Move:</label>
-        </div>
-        <select class="custom-select" id="movie" name="movie">
-                    <option selected>Choose...</option>
-                    {% for movie_item in movies.all %}
-                        <option value="{{movie_item.id}}">{{movie_item.title}}</option>
-                    {% endfor %}
-                </select>
-    </div>
-
-    <button type="submit" class="btn btn-info">Publish</button>
-</form>
-
-{% endif %}
-</div>
-
-</body>
-
-</html>
-{% endblock %}
->>>>>>> 02f6e28eef55f67bf5e807961fd574dee5b05c33

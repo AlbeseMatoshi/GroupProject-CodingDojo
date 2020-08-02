@@ -31,7 +31,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    role = models.CharField(max_length=10, default='0')
+    role = models.CharField(max_length=1, default='0')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
@@ -65,7 +65,7 @@ class CinoRoom(models.Model):
 class ShowTime(models.Model):
     date = models.DateField()
     tickets = models.IntegerField()
-    price = models.DecimalField(max_digits=4, decimal_places=2)   
+    price = models.DecimalField(max_digits=4, decimal_places=2)
     time = models.TimeField(auto_now=True)
     movie = models.ForeignKey(Movie, related_name='has_show_times', on_delete = models.CASCADE)
     room = models.ForeignKey(CinoRoom, related_name='has_show_times', on_delete = models.CASCADE)

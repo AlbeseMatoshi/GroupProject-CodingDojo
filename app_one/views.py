@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
 import bcrypt
+from django.http import JsonResponse
 import numpy as np
 
 def login_page(request):
@@ -107,3 +108,8 @@ def search(request):
 #     price =  * request.session['quantity']
 #     booking = Booking.objects.create(tickets = request.POST['tickets'], price = price)
 #     return redirect('/booking')
+def show_events(request):
+    context = {
+        'events': Event.objects.all()
+    }
+    return render(request, 'events.html', context)

@@ -7,7 +7,12 @@ from app_bookings.models import *
 ## FILE TO HELP US DEVELOP OTHER PARTS
 ## USER WILL NOT HAVE ACCESS TO THESE ACTIONS
 def show_dashboard(request):
-    
+    try:
+        a = User.objects.get(id=request.session['uid'])
+        if a.role == 0:
+            return redirect('/')
+    except:
+        return redirect('/')
     context = {
         'movies' : Movie.objects.all(),
         'rooms' : CinoRoom.objects.all(),

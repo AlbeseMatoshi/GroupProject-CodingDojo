@@ -17,9 +17,11 @@
                   </li>
 {#                  TODO: Shfaqja management  vec nese eshte admin #}
 {#                  (Gjitheashtu duhet edhe ne backend me lan me hi ne kete route vetem nese eshte admin. #}
-                  <li class="nav-item">
-                        <a class="nav-link" href="/management">Management</a>
-                  </li>
+                  {% if logged_user.role == '1' %}
+                      <li class="nav-item">
+                            <a class="nav-link" href="/management">Management</a>
+                      </li>
+                      {% endif %}
                   </ul>
                   <div class="form-inline my-2 my-lg-0 nav-item active  navbar-nav navbar-dark">
                         {% if logged_user %}

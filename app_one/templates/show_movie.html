@@ -1,108 +1,56 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cino</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-
-</head>
-
-<body>
-<<<<<<< HEAD
-      <div class="wrapper"> 
-            {% include 'includes/navbar.html' %}
-            <div class="container p-5">
-                  <div class="row">
-{#                        <div class="col col-2">#}
-{#                        {% if movie.cover_image %}#}
-{#                              <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image"/>#}
-{#                        {% else %}#}
-{#                              <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">#}
-{#                        {% endif %}#}
-{#                        </div>#}
-                        <div class="col-8">
-                              <h1>{{movie.title}}</h1>
-                              <p>{{movie.desc}}</p>
-                              <h5>Here is a trailer for you:</h5>
-                              <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="col-4">
-                            <p>Available tickets: <b>6</b></p>
-                            <p>Happening in: <b>12 Jul 2020, 00:30pm</b></p>
-                            <p>IMDb rate: <b>7/10</b></p>
-                            <button class="btn btn-info btn-block"  data-toggle="modal" data-target="#exampleModal">Get tickets</button>
-                        </div>
-                  </div>
-            </div>
-      </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Get a ticket for "{{ movie.title }}"</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-</body>
-=======
+{% extends 'base.html' %}
+{% block 'content' %}
     <div class="wrapper">
-        {% include 'includes/navbar.html' %}
         <div class="container p-5">
             <div class="row">
-                <div class="col col-2">
-                    {% if movie.cover_image %}
-                    <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image" /> {% else %}
-                    <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image"> {% endif %}
-                </div>
-                <div class="col-5">
+                {#                        <div class="col col-2">#}
+                {#                        {% if movie.cover_image %}#}
+                {#                              <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image"/>#}
+                {#                        {% else %}#}
+                {#                              <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">#}
+                {#                        {% endif %}#}
+                {#                        </div>#}
+                <div class="col-8">
                     <h1>{{movie.title}}</h1>
                     <p>{{movie.desc}}</p>
                     <h5>Here is a trailer for you:</h5>
                     <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="col">
-
-                    <ul>
-                        {% for showtime_item in showtimes.all %}
-                        <p>Available tickets: <b>{{showtime_item.tickets}}</b></p>
-                        <p>Price: <b>{{showtime_item.price}}</b></p>
-                        <p>Happening in:
-                            <li> <b>{{showtime_item.date}}, {{showtime_item.time}}</b> </li>
-
-                    </ul>
-                    </p>
+                <div class="col-4">
+                    <p>Available tickets: <b>6</b></p>
+                    <p>Happening in: <b>12 Jul 2020, 00:30pm</b></p>
                     <p>IMDb rate: <b>7/10</b></p>
-                    <form action="/tickets/{{showtime.id}}" method="POST">
-                        {% csrf_token %}
-                        <input type="number" class="form-control" name="tickets">
-                        <button class="btn btn-info btn-block" type="submit">Get tickets</button>
-                    </form>
-                    {% endfor %}
+                    <button class="btn btn-info btn-block"  data-toggle="modal" data-target="#exampleModal">Get tickets</button>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg text-dark" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Get a ticket for "{{ movie.title }}"</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="POST">
+                            <select name="selected_showtime" id="selected_showtime" class="form-control">
+                                {% for showtime in movie.has_show_times.all %}
+                                    <option value="{{ showtime.id }}">{{ showtime.room.room }} | {{ showtime.date }} {{ showtime.time }} | Starting from {{ showtime.price }}$</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-
->>>>>>> 02f6e28eef55f67bf5e807961fd574dee5b05c33
-</html>
+{% endblock %}
