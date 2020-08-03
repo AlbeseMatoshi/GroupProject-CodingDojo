@@ -21,8 +21,11 @@
         <div class="wrapper">
             {% for booking in all_bookings %}
             <p>{{booking.buyer.first_name}}
-                <span> | Number of tickets: {{  booking.tickets}}</span>
+                <span> | Number of tickets: {{  booking.tickets}} | Price: {{booking.tickets}} * {{booking.showtime.price}}</span>
             </p>
+            <p>Movie: {{booking.showtime.movie.title }}</p>
+            <p>Date: {{booking.showtime.date}}</p>
+
             {% endfor %}
         </div>
     </div>
