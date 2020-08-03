@@ -55,16 +55,21 @@ def log_out(request):
 def show_one_movie(request, movie_id):
     context = {
         'movie' : Movie.objects.get(id=movie_id),
-        'showtimes' : ShowTime.objects.filter(movie=movie_id)
+        'showtimes' : ShowTime.objects.filter(movie=movie_id),
+        'ratings': Review.objects.filter(for_movie=movie_id),
+        'comments': Comments.objects.filter(for_movie=movie_id),
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
+    
     return render(request, 'show_movie.html', context)
 
 
 def show_one_event(request, event_id):
     context = {
-        'event': Event.objects.get(id=event_id)
+        'event': Event.objects.get(id=event_id),
+        'logged_user': User.objects.get(id=request.session['uid']),
+                
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
@@ -112,7 +117,47 @@ def show_events(request):
         'events': Event.objects.all()
     }
     return render(request, 'events.html', context)
+
+
+def review(request, movie_id):
+    str_id = str(movie_id)
+    movie = Review.objects.create(rating = request.POST['rating'], for_movie = Movie.objects.get(id=movie_id),
+                                  posted_by = User.objects.get(id=request.session['uid']))
+    return redirect(f'/movie/{str_id}')
+
+
+def add_comment(request, movie_id):
+    str_id = str(movie_id)
+    comm = Comments.objects.create(content = request.POST['content'], posted_by = User.objects.get(id=request.session['uid']),
+                                   for_movie = Movie.objects.get(id=movie_id))
+    return redirect(f'/movie/{str_id}')
+
+def join_event(request, event_id):
+    str_id = str(event_id)
+    if 'uid' not in request.session:
+        return redirect('/')
+    else:
+        user = User.objects.get(id=request.session['uid'])
+        event = Event.objects.get(id=event_id)
+        
+        user.likes_events.add(event)
+        
+        return redirect(f'/event/{str_id}')
+    
+def dislike_event(request, event_id):
+    str_id = str(event_id)
+    if 'uid' not in request.session:
+        return redirect('/')
+    else:
+        user = User.objects.get(id=request.session['uid'])
+        event = Event.objects.get(id=event_id)
+        
+        user.likes_events.remove(event)
+        
+        return redirect(f'/event/{str_id}')
+
 	
 	
 def about_us(request):
 	return render(request, 'about_us.html')
+
