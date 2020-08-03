@@ -103,6 +103,7 @@ def search(request):
 
 def tickets(request, showtime_id):
     booking = Booking.objects.create(tickets = request.POST['tickets'],
+                                     showtime = ShowTime.objects.get(id=showtime_id),
                                      buyer = User.objects.get(id=request.session['uid']))
     return redirect('/')
 

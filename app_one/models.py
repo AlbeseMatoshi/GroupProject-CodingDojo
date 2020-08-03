@@ -90,6 +90,7 @@ class ShowTime(models.Model):
     
 class Booking(models.Model):
     tickets = models.IntegerField()
+    showtime = models.ForeignKey(ShowTime, related_name='has_showtimes', on_delete= models.CASCADE)
     buyer = models.ForeignKey(User, related_name='has_bookings', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  
