@@ -34,5 +34,6 @@ urlpatterns = [
     path('event/<int:event_id>/dislike', views.dislike_event),
     #DEVELOPMENT ONLY
     path('search', views.search)
+    path('about_us', views.about_us)
     ##
 ]

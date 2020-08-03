@@ -118,6 +118,7 @@ def show_events(request):
     }
     return render(request, 'events.html', context)
 
+
 def review(request, movie_id):
     str_id = str(movie_id)
     movie = Review.objects.create(rating = request.POST['rating'], for_movie = Movie.objects.get(id=movie_id),
@@ -154,3 +155,9 @@ def dislike_event(request, event_id):
         user.likes_events.remove(event)
         
         return redirect(f'/event/{str_id}')
+
+	
+	
+def about_us(request):
+	return render(request, 'about_us.html')
+
