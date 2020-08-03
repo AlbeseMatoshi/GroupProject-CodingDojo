@@ -1,16 +1,32 @@
-{% extends 'base.html' %}
-{% block 'content' %}
-    <div class="row">
-        <div class="col col-2">
-            {% if event.cover_image %}
-                <img src="{{ event.cover_image.url }}" class="img-thumbnail" alt="cover image"/>
-
-                {% endif %}
-        </div>
-        <div class="col col-8">
-            <h1>{{ event.title }}</h1>
-            <p>{{ event.desc }}</p>
-        </div>
-
+{% extends 'base.html' %} {% block 'content' %}
+<div class="row">
+    <div class="col col-2">
+        {% if event.cover_image %}
+        <img src="{{ event.cover_image.url }}" class="img-thumbnail" alt="cover image" /> {% endif %}
     </div>
+    <div class="col col-8">
+        <h1>{{ event.title }}</h1>
+        <p>{{ event.desc }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr class="border-white">
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+
+        {% if logged_user not in event.likes.all %}
+        <h5>Would you join the event?</h5>
+        <a href="/event/{{event.id}}/like"> Yes </a> {% elif logged_user in event.likes.all %}
+        <h5>Would you rather not join the event?</h5>
+        <a href="/event/{{event.id}}/dislike">Yes</a> {% endif %}
+    </div>
+    <div class="col-6">
+        <h5>Number of people going: </h5>
+        <p>{{ event.likes.count }}</p>
+    </div>
+
+</div>
 {% endblock %}
