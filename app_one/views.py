@@ -112,3 +112,7 @@ def show_events(request):
         'events': Event.objects.all()
     }
     return render(request, 'events.html', context)
+	
+	
+def about_us(request):
+	return render(request, 'about_us.html')
