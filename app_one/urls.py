@@ -27,7 +27,7 @@ urlpatterns = [
     path('event/<int:event_id>', views.show_one_event),
     path('page/<int:page_id>', views.show_page),
     path('events', views.show_events),
-    # path('tickets/<int:movie_id>', views.tickets),
+    path('tickets/<int:showtime_id>', views.tickets),
     #DEVELOPMENT ONLY
     path('search', views.search)
     ##

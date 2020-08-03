@@ -2,6 +2,13 @@
 <div class="row mb-4">
 
     <div class="col-6 py-3 px-5 ">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <h3>Add a movie</h3>
         <form action="movie/new" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -53,6 +60,7 @@
         <hr class="border-white">
     </div>
     <div class="col-6 py-3 px-5 ">
+
         <h3>Add Room</h3>
         <small>INFO: when a room is created, so are seats of that room</small>
         <form action="room/new" method="POST">
@@ -65,7 +73,9 @@
         </form>
     </div>
     <div class="col-6 py-3 px-5 ">
+
         <form action="showtime/new" method="POST">
+
             <h3>Add a Movie ShowTime</h3>
             {% csrf_token %}
             <div class="form-group">

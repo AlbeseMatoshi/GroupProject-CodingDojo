@@ -42,8 +42,8 @@ class MovieManager(models.Manager):
         errors = {}     
         if len(postData['title']) < 2:
             errors["title"] = "Title should be at least 2 characters"
-        if len(postData['desc']) < 10:
-            errors["desc"] = "Description should be at least 10 characters"            
+        if len(postData['description']) < 10:
+            errors["description"] = "Description should be at least 10 characters"            
         return errors
 
 class Movie(models.Model):
@@ -56,11 +56,25 @@ class Movie(models.Model):
     video_url = models.TextField()
     objects = MovieManager()
 
+class CinoRoomManager(models.Manager):
+    def room_validator(self, postData):
+        errors = {}     
+        if len(postData['room_name']) > 2:
+            errors['room_name'] = "Room name should be only 2 characters"          
+        return errors
+    
 class CinoRoom(models.Model):
     room = models.CharField(max_length=2, default='A1')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = CinoRoomManager()
     
+class ShowTimeManager(models.Manager):
+    def showtime_validator(self, postData):
+        errors = {}     
+        if postData['movie_show_date'] < str(date.today()):
+            errors['movie_show_date'] = "Date must be in the future"         
+        return errors
     
 class ShowTime(models.Model):
     date = models.DateField()
@@ -71,11 +85,11 @@ class ShowTime(models.Model):
     room = models.ForeignKey(CinoRoom, related_name='has_show_times', on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now= True)
+    objects = ShowTimeManager()
            
     
 class Booking(models.Model):
     tickets = models.IntegerField()
-    price = models.DecimalField(max_digits=4, decimal_places=2)   
     buyer = models.ForeignKey(User, related_name='has_bookings', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)  
@@ -126,8 +140,8 @@ class EventManager(models.Manager):
         errors = {}     
         if len(postData['title']) < 2:
             errors["title"] = "Title should be at least 2 characters"
-        if len(postData['desc']) < 5:
-            errors["desc"] = "Description should be at least 5 characters" 
+        if len(postData['description']) < 5:
+            errors["description"] = "Description should be at least 5 characters" 
                   
         return errors
     
@@ -139,4 +153,5 @@ class Event(models.Model):
     cover_image = models.ImageField(upload_to="images", blank=True)   
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = EventManager()
     
