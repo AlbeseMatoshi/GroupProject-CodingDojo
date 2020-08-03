@@ -1,56 +1,59 @@
-{% extends 'base.html' %}
-{% block 'content' %}
-    <div class="wrapper">
-        <div class="container p-5">
-            <div class="row">
-                {#                        <div class="col col-2">#}
+{% extends 'base.html' %} {% block 'content' %}
+<div class="wrapper">
+    <div class="container p-5">
+        <div class="row">
+            <!-- {#                        <div class="col col-2">#}
                 {#                        {% if movie.cover_image %}#}
                 {#                              <img src="{{movie.cover_image.url}}" class="img-thumbnail" alt="cover image"/>#}
                 {#                        {% else %}#}
                 {#                              <img class="img-thumbnail" src="{% static 'svgs/no_image_available.svg' %}" alt="No available image">#}
                 {#                        {% endif %}#}
-                {#                        </div>#}
-                <div class="col-8">
-                    <h1>{{movie.title}}</h1>
-                    <p>{{movie.desc}}</p>
-                    <h5>Here is a trailer for you:</h5>
-                    <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <div class="col-4">
-                    <p>Available tickets: <b>6</b></p>
-                    <p>Happening in: <b>12 Jul 2020, 00:30pm</b></p>
-                    <p>IMDb rate: <b>7/10</b></p>
-                    <button class="btn btn-info btn-block"  data-toggle="modal" data-target="#exampleModal">Get tickets</button>
-                </div>
+                {#                        </div>#} -->
+            <div class="col-8">
+                <h1>{{movie.title}}</h1>
+                <p>{{movie.desc}}</p>
+                <h5>Here is a trailer for you:</h5>
+                <iframe height="300" width="600" src="{{ movie.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-
-
-
+            <div class="col-4">
+                <p>Available tickets: <b>6</b></p>
+                <p>Happening in: <b>12 Jul 2020, 00:30pm</b></p>
+                <p>IMDb rate: <b>7/10</b></p>
+                <button class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal">Get tickets</button>
+            </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg text-dark" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Get a ticket for "{{ movie.title }}"</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+
+
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg text-dark" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Get a ticket for "{{ movie.title }}"</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" method="POST">
-                            <select name="selected_showtime" id="selected_showtime" class="form-control">
-                                {% for showtime in movie.has_show_times.all %}
+                </div>
+                <div class="modal-body">
+                    {% for showtime in movie.has_show_times.all %}
+                    <form action="/tickets/{{showtime.id}}" method="POST">
+                        {% csrf_token %}
+                        <select name="selected_showtime" id="selected_showtime" class="form-control">
+                                
                                     <option value="{{ showtime.id }}">{{ showtime.room.room }} | {{ showtime.date }} {{ showtime.time }} | Starting from {{ showtime.price }}$</option>
-                                {% endfor %}
+                               
                             </select>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                        <input type="number" class="form-control my-2" name="tickets" placeholder="Number of tickets:" required>
+                        <button type="submit" class="btn btn-success">Submit</button> {% endfor %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

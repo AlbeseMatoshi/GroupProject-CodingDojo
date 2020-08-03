@@ -101,13 +101,12 @@ def search(request):
         return redirect('/')
     
 
-# def tickets(request, movie_id):
-#     request.session['quantity'] = int(request.POST['tickets'])
-#     movie = Movie.objects.get(id=movie_id)
-    
-#     price =  * request.session['quantity']
-#     booking = Booking.objects.create(tickets = request.POST['tickets'], price = price)
-#     return redirect('/booking')
+def tickets(request, showtime_id):
+    booking = Booking.objects.create(tickets = request.POST['tickets'],
+                                     showtime = ShowTime.objects.get(id=showtime_id),
+                                     buyer = User.objects.get(id=request.session['uid']))
+    return redirect('/')
+
 def show_events(request):
     context = {
         'events': Event.objects.all()

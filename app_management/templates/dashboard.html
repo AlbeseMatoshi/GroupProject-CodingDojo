@@ -1,124 +1,135 @@
-{% extends 'base.html' %}
-{% block 'content' %}
-    <div class="row mb-4">
+{% extends 'base.html' %} {% block 'content' %}
+<div class="row mb-4">
 
-        <div class="col-6 py-3 px-5 ">
-            <h3>Add a movie</h3>
-            <form action="movie/new" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group mt-3">
-                    <label for="movie_cover_image">Upload picture:</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input"  id="movie_cover_image" name="cover_image">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+    <div class="col-6 py-3 px-5 ">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }} text-danger" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <h3>Add a movie</h3>
+        <form action="movie/new" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mt-3">
+                <label for="movie_cover_image">Upload picture:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="movie_cover_image" name="cover_image" required>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="ex. F9">
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="ex. F9" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="5" type="text" class="form-control" name="description" placeholder="ex. Dominic Toretto and his crew join forces to battle the most skilled assassin and high-performance driver they've ever encountered -- his forsaken brother." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="video_url">Youtube Trailer Video Embedded URL</label>
+                <input type="text" class="form-control" id="video_url" name="video_url" placeholder="ex. https://www.youtube.com/embed/_qyw6LC5pnE" required>
+            </div>
+            <button type="submit" class="btn btn-block btn-info">Publish</button>
+        </form>
+    </div>
+    <div class="col-6 py-3 px-5 ">
+        <h3>Add an Event</h3>
+        <form action="events/new" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group mt-3">
+                <label for="event_cover_image">Upload picture:</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="event_cover_image" name="cover_image" required>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea rows="5" type="text" class="form-control" name="description" placeholder="ex. Dominic Toretto and his crew join forces to battle the most skilled assassin and high-performance driver they've ever encountered -- his forsaken brother."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="video_url">Youtube Trailer Video Embedded URL</label>
-                    <input type="text" class="form-control" id="video_url" name="video_url" placeholder="ex. https://www.youtube.com/embed/_qyw6LC5pnE">
-                </div>
-                <button type="submit" class="btn btn-block btn-info">Publish</button>
-            </form>
-        </div>
-        <div class="col-6 py-3 px-5 "><h3>Add an Event</h3>
-            <form action="events/new" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group mt-3">
-                    <label for="event_cover_image">Upload picture:</label>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="event_cover_image" name="cover_image">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Event title">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="Event description"></textarea>
-                </div>
-                <button type="submit" class="btn btn-block btn-info">Publish</button>
-            </form>
-        </div>
-        <div class="col-12">
-            <hr class="border-white">
-        </div>
-        <div class="col-6 py-3 px-5 "><h3>Add Room</h3>
-            <small>INFO: when a room is created, so are seats of that room</small>
-            <form action="room/new" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="Room">Room name:</label>
-                    <input type="text" class="form-control" id="Room" name="room_name">
-                </div>
-                <button type="submit" class="btn btn-block btn-info">Add</button>
-            </form>
-        </div>
-        <div class="col-6 py-3 px-5 ">
-            <form action="showtime/new" method="POST">
-                <h3>Add a Movie ShowTime</h3>
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="movie_show_date">Date</label>
-                    <input type="date" class="form-control" id="movie_show_date" name="movie_show_date">
-                </div>
-                <div class="form-group">
-                    <label for="movie_tickets">
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Event title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Event description" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-block btn-info">Publish</button>
+        </form>
+    </div>
+    <div class="col-12">
+        <hr class="border-white">
+    </div>
+    <div class="col-6 py-3 px-5 ">
+
+        <h3>Add Room</h3>
+        <small>INFO: when a room is created, so are seats of that room</small>
+        <form action="room/new" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="Room">Room name:</label>
+                <input type="text" class="form-control" id="Room" name="room_name" required>
+            </div>
+            <button type="submit" class="btn btn-block btn-info">Add</button>
+        </form>
+    </div>
+    <div class="col-6 py-3 px-5 ">
+
+        <form action="showtime/new" method="POST">
+
+            <h3>Add a Movie ShowTime</h3>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="movie_show_date">Date</label>
+                <input type="date" class="form-control" id="movie_show_date" name="movie_show_date" required>
+            </div>
+            <div class="form-group">
+                <label for="movie_tickets">
                         Available Tickets
                     </label>
-                    <input type="number" id="movie_tickets" class="form-control" name="movie_tickets" placeholder="10">
-                </div>
-                <div class="form-group">
-                    <label for="movie_price">
+                <input type="number" id="movie_tickets" class="form-control" name="movie_tickets" placeholder="10" required>
+            </div>
+            <div class="form-group">
+                <label for="movie_price">
                         Ticket price
                     </label>
-                    <input type="number" id="movie_price" class="form-control" name="price" placeholder="3">
-                </div>
-                <div class="form-group">
-                    <label for="movie_show_time">Time</label>
-                    <input type="time" class="form-control" id="movie_show_time" name="movie_show_time">
-                </div>
+                <input type="number" id="movie_price" class="form-control" name="price" placeholder="3" required>
+            </div>
+            <div class="form-group">
+                <label for="movie_show_time">Time</label>
+                <input type="time" class="form-control" id="movie_show_time" name="movie_show_time" required>
+            </div>
 
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="cino_room">Room:</label>
-                    </div>
-                    <select class="custom-select" id="cino_room" name="cino_room">
-                        <option selected>Choose...</option>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="cino_room">Room:</label>
+                </div>
+                <select class="custom-select" id="cino_room" name="cino_room" required>
+                        <option value="">Choose...</option>
                         {% for room in rooms %}
                             <option value="{{ room.id }}">{{ room.room }}</option>
                         {% endfor %}
                     </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="movie">Move:</label>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="movie">Move:</label>
-                    </div>
-                    <select class="custom-select" id="movie" name="movie">
-                        <option selected>Choose...</option>
+                <select class="custom-select" id="movie" name="movie" required>
+                        <option value ="" >Choose...</option>
                         {% for movie_item in movies.all %}
                             <option value="{{ movie_item.id }}">{{ movie_item.title }}</option>
                         {% endfor %}
                     </select>
-                </div>
+            </div>
 
-                <button type="submit" class="btn btn-block btn-info">Publish</button>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-block btn-info">Publish</button>
+        </form>
     </div>
-    <script>
+</div>
+<script>
     $('.custom-file-input').on('change', function() {
-       let fileName = $(this).val().split('\\').pop();
-       $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
-    </script>
-{%  endblock %}
+</script>
+{% endblock %}
