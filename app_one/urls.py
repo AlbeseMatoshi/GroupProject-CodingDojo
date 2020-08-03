@@ -30,5 +30,6 @@ urlpatterns = [
     path('tickets/<int:showtime_id>', views.tickets),
     #DEVELOPMENT ONLY
     path('search', views.search)
+    path('about_us', views.about_us)
     ##
 ]
