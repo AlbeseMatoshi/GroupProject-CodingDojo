@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block 'content' %}
     <div class="row">
-        <div class="col col-2">
+        <div class="col-7 col-2">
             {% if event.cover_image %}
-                <img src="{{ event.cover_image.url }}" class="img-thumbnail" alt="cover image"/>
+                <img src="{{ event.cover_image.url }}" class="my-3 mb-5" style="height: 400px" alt="cover image"/>
 
                 {% endif %}
         </div>
-        <div class="col col-8">
-            <h1>{{ event.title }}</h1>
+        <div class="col col-5 my-3">
+            <h3>{{ event.title }}</h3>
             <p>{{ event.desc }}</p>
         </div>
 
