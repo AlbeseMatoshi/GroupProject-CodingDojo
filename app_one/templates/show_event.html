@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block 'content' %}
 <div class="row">
-    <div class="col col-2">
+    <div class="col col-6">
         {% if event.cover_image %}
         <img src="{{ event.cover_image.url }}" class="img-thumbnail" alt="cover image" /> {% endif %}
     </div>
-    <div class="col col-8">
+    <div class="col col-6">
         <h1>{{ event.title }}</h1>
         <p>{{ event.desc }}</p>
     </div>
@@ -20,7 +20,7 @@
         {% if logged_user not in event.likes.all %}
         <h5>Would you join the event?</h5>
         <a href="/event/{{event.id}}/like"> Yes </a> {% elif logged_user in event.likes.all %}
-        <h5>Would you rather not join the event?</h5>
+        <h5>Want to cancel going?</h5>
         <a href="/event/{{event.id}}/dislike">Yes</a> {% endif %}
     </div>
     <div class="col-6">

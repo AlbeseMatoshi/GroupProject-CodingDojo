@@ -29,7 +29,7 @@ def add_movie(request):
             messages.error(request, value)
         return redirect('/management')
     else:
-        movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'])
+        movie = Movie.objects.create(title=request.POST['title'], desc=request.POST['description'], video_url=request.POST['video_url'])
         if 'cover_image' in request.FILES != None:
             pic = request.FILES['cover_image']
             fs = FileSystemStorage()

@@ -151,8 +151,8 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     desc = models.TextField()
     likes = models.ManyToManyField(User, related_name='likes_events')
-    cover_image = models.ImageField(upload_to="images", blank=True)   
-    created_at = models.DateTimeField(auto_now_add=True)
+    cover_image = models.ImageField(upload_to="images", blank=True)
+    created_at =models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = EventManager()
     
