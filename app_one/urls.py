@@ -27,8 +27,13 @@ urlpatterns = [
     path('event/<int:event_id>', views.show_one_event),
     path('page/<int:page_id>', views.show_page),
     path('events', views.show_events),
-    # path('tickets/<int:movie_id>', views.tickets),
+    path('tickets/<int:showtime_id>', views.tickets),
+    path('movie/<int:movie_id>/review', views.review),
+    path('add_comment/<int:movie_id>', views.add_comment),
+    path('event/<int:event_id>/like', views.join_event),
+    path('event/<int:event_id>/dislike', views.dislike_event),
     #DEVELOPMENT ONLY
-    path('search', views.search)
+    path('search', views.search),
+    path('about', views.about_us)
     ##
 ]

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -13,10 +14,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 </head>
+
 <body>
-      {% include 'includes/navbar.html' %}
-      <div class="container">
-            All bookings
-      </div>
+    {% include 'includes/navbar.html' %}
+    <div class="container">
+        <div class="wrapper">
+            {% for booking in all_bookings %}
+            <p>{{booking.buyer.first_name}}
+                <span> | Number of tickets: {{  booking.tickets}} | Price: {{booking.tickets}} * {{booking.showtime.price}}</span>
+            </p>
+            <p>Movie: {{booking.showtime.movie.title }}</p>
+            <p>Date: {{booking.showtime.date}}</p>
+
+            {% endfor %}
+        </div>
+    </div>
 </body>
+
 </html>
