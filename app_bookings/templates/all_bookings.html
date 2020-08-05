@@ -19,14 +19,33 @@
     {% include 'includes/navbar.html' %}
     <div class="container">
         <div class="wrapper">
-            {% for booking in all_bookings %}
-            <p>{{booking.buyer.first_name}}
-                <span> | Number of tickets: {{  booking.tickets}} | Price: {{booking.tickets}} * {{booking.showtime.price}}</span>
-            </p>
-            <p>Movie: {{booking.showtime.movie.title }}</p>
-            <p>Date: {{booking.showtime.date}}</p>
+            <div class="row">
+                <div class="col-12">
+                    <h4>Hello, {{logged_user.first_name}}! Here is a list of your bookings:</h4>
 
-            {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <hr class="border-white">
+                </div>
+            </div>
+
+            <div class="col-12">
+                {% for booking in all_bookings %}
+                <div class="card bg-darkblue border-rounded">
+                    <div class="card-body">
+                        <h5 class="card-title">Movie: {{booking.showtime.movie.title }} | Date: {{booking.showtime.date}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> Number of tickets: {{ booking.tickets}} | Price: {{booking.tickets}} * {{booking.showtime.price}}</h6>
+
+                        <small>Room: {{booking.showtime.room}}</small>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
