@@ -117,6 +117,8 @@ def show_events(request):
     context = {
         'events': Event.objects.all()
     }
+    if 'uid' in request.session:
+        context['logged_user'] = User.objects.get(id=request.session['uid'])
     return render(request, 'events.html', context)
 
 
@@ -160,7 +162,11 @@ def dislike_event(request, event_id):
 	
 	
 def about_us(request):
-	return render(request, 'about_us.html')
+    if 'uid' in request.session:
+        context = {
+            'logged_user': User.objects.get(id=request.session['uid'])
+        }
+        return render(request, 'about_us.html', context)
 
 def edit_movie(request, movie_id):
     context={
