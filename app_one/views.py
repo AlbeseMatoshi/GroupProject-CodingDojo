@@ -58,6 +58,7 @@ def show_one_movie(request, movie_id):
         'showtimes' : ShowTime.objects.filter(movie=movie_id),
         'ratings': Review.objects.filter(for_movie=movie_id),
         'comments': Comments.objects.filter(for_movie=movie_id),
+        'logged_user': User.objects.get(id=request.session['uid'])
     } 
     if 'uid' in request.session: 
         context['logged_user'] = User.objects.get(id=request.session['uid'])
@@ -171,7 +172,12 @@ def edit_movie(request, movie_id):
 
 
 def update(request, movie_id):
-    if request.method == 'POST':
+    errors = Movie.objects.movie_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/management')
+    else:
         str_id=str(movie_id)
         edit_movie=Movie.objects.get(id=movie_id)
         edit_movie.title=request.POST['title']

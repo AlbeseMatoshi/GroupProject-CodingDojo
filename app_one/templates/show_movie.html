@@ -38,12 +38,11 @@
                 {% for showtime in movie.has_show_times.all %}
                 <p>Available tickets: <b>{{showtime.tickets}}</b></p>
                 <p>Happening in: <b>{{showtime.date}}</b></p>
-                <p>IMDb rate: <b>7/10</b></p>
+                <p>IMDb rate: <b>{{ '123456789'|random}}/10</b></p>
                 <button class="btn btn-info btn-block" data-toggle="modal" data-target="#exampleModal">Get tickets</button>
                 <div class="border border-white my-3"></div>
-                {% endfor %}
-                <a href="edit/{{movie.id}}" class="btn btn-success">Edit movie</a>
-
+                {% endfor %} {% if logged_user.role == '1' %}
+                <a href="edit/{{movie.id}}" class="btn btn-success">Edit movie</a> {% endif %}
             </div>
 
         </div>
@@ -105,7 +104,7 @@
                                     <option value="{{ showtime.id }}">{{ showtime.room.room }} | {{ showtime.date }} {{ showtime.time }} | Starting from {{ showtime.price }}$</option>
                                
                             </select>
-                        <input type="number" class="form-control my-2" name="tickets" placeholder="Number of tickets:" required>
+                        <input type="number" class="form-control my-2" name="tickets" placeholder="Number of tickets:">
                         <button type="submit" class="btn btn-success">Submit</button> {% endfor %}
                     </form>
                 </div>
