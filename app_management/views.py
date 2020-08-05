@@ -38,11 +38,6 @@ def add_movie(request):
             movie.save()
         return redirect('/')
 
-def delete_movie(request, movie_id):
-    movie = Movie.objects.get(id=movie_id)
-    movie.delete()
-    return redirect('/')
-
 # Events
 def add_event(request):
     errors = Event.objects.event_validator(request.POST)

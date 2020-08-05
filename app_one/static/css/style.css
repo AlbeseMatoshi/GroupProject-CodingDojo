@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     background-color: #002b36;
     color: #ffffff;
 }
@@ -22,7 +22,6 @@
 body {
     background-color: #F4F7F6;
     font-family: 'Lato', sans-serif;
-    
 }
 
 #login-body {
@@ -68,30 +67,36 @@ h2 {
 label {
     font-weight: bold;
 }
+
 .top-right {
-  position: absolute;
-  top: 8px;
-  right: 20px;
-  border-bottom: 4px solid red;
-  font-size: 28px;
-  letter-spacing: 0.2em;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    border-bottom: 4px solid red;
+    font-size: 28px;
+    letter-spacing: 0.2em;
 }
+
 .card-image {
     display: inline-block;
     overflow: hidden;
-
 }
-.card-image > a > img {
+
+.card-image>a>img {
     transition: transform 0.3s;
 }
 
-.card-image > a > img:hover {
+.card-image>a>img:hover {
     cursor: pointer;
-    transform:scale(1.05);
-    -ms-transform:scale(1.05); /* IE 9 */
-    -moz-transform:scale(1.05); /* Firefox */
-    -webkit-transform:scale(1.05); /* Safari and Chrome */
-    -o-transform:scale(1.05); /* Opera */
+    transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    /* IE 9 */
+    -moz-transform: scale(1.05);
+    /* Firefox */
+    -webkit-transform: scale(1.05);
+    /* Safari and Chrome */
+    -o-transform: scale(1.05);
+    /* Opera */
 }
 
 

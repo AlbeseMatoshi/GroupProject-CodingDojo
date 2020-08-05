@@ -32,6 +32,8 @@ urlpatterns = [
     path('add_comment/<int:movie_id>', views.add_comment),
     path('event/<int:event_id>/like', views.join_event),
     path('event/<int:event_id>/dislike', views.dislike_event),
+    path('movie/edit/<int:movie_id>', views.edit_movie),
+    path('movie/edit/update/<int:movie_id>', views.update),
     #DEVELOPMENT ONLY
     path('search', views.search),
     path('about', views.about_us)
