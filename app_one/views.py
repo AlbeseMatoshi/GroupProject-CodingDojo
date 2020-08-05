@@ -161,3 +161,33 @@ def dislike_event(request, event_id):
 def about_us(request):
 	return render(request, 'about_us.html')
 
+def edit_movie(request, movie_id):
+    context={
+        'edit_movie': Movie.objects.get(id=movie_id),
+
+    }
+    
+    return render(request, 'edit_movie.html', context)
+
+
+def update(request, movie_id):
+    if request.method == 'POST':
+        str_id=str(movie_id)
+        edit_movie=Movie.objects.get(id=movie_id)
+        edit_movie.title=request.POST['title']
+        edit_movie.desc=request.POST['description']
+        edit_movie.video_url=request.POST['video_url']
+        if 'cover_image' in request.FILES != None:
+            pic = request.FILES['cover_image']
+            fs = FileSystemStorage()
+            fs.save(pic.name, pic)
+            edit_movie.cover_image = pic
+            edit_movie.save()
+        
+        return redirect(f'/movie/{str_id}')
+        
+    return redirect('/')
+
+
+
+
